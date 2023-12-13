@@ -1,0 +1,55 @@
+﻿﻿@using RunGroupWebApp.ViewModels
+@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<section class="vh-100" style="background-color: #9A616D;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+          <div class="card" style="border-radius: 1rem;">
+            <div class="row g-0">
+                <!---
+              <div class="col-md-6 col-lg-5 d-none d-md-block">
+                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img5.webp"
+                  alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+              </div>-->
+              <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                <div class="card-body p-4 p-lg-5 text-black">
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="col-md-12 alert alert-danger">
+                            <span><b>Sorry!</b> - @TempData["Error"]</span>
+                        </div>
+                    }
+  
+                    <form asp-action="Login">
+                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Inicio de Sesion</h5>
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="EmailAddress" class="control-label"></label>
+                            <input asp-for="EmailAddress" class="form-control" placeholder="Correo Electronico">
+                            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control" placeholder="Contraseña" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-outline-success float right" type="submit" value="Log in" />
+                            <a class="btn btn-outline-secondary" asp-controller="Club" asp-action="Index">Cancelar</a>
+                        </div>
+                    </form>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

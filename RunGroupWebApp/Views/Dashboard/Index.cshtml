@@ -1,0 +1,66 @@
+﻿@model RunGroupWebApp.ViewModels.DashBoardViewModel
+
+<div class="container mt-5">
+    <h1 class="display-4 fw-normal">Dashboard</h1>
+    <div class="mb-3">
+        <a class="btn btn-info rounded-pill mr-3" asp-area="" asp-controller="Club" asp-action="Create">Crear Club</a>
+        <a class="btn btn-success rounded-pill mr-3" asp-area="" asp-controller="Race" asp-action="Create">Crear Carrera</a>
+        <a class="btn btn-warning rounded-pill" asp-area="" asp-controller="Dashboard" asp-action="EditUserProfile">Editar perfil de usuario</a>
+    </div>
+
+    <div class="album py-5 bg-light">
+        <h2 class="display-4 fw-normal">Carreras publicadas</h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @foreach (var item in Model.Races)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="@item.Image" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Title</h5>
+                            <p class="card-text">@item.Description</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a class="btn btn-success rounded-pill mr-2" asp-controller="Club" asp-action="Detail" asp-route-id="@item.Id">View</a>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <a class="btn btn-outline-secondary rounded-pill mr-2" asp-controller="Race" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                        <a class="btn btn-outline-secondary rounded-pill" asp-controller="Race" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    }
+                                </div>
+                                <small class="text-muted">@item.RaceCategory</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <h2 class="display-4 fw-normal">Clubes publicados</h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @foreach (var item in Model.Clubs)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="@item.Image" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Title</h5>
+                            <p class="card-text">@item.Description</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a class="btn btn-success rounded-pill mr-2" asp-controller="Club" asp-action="Detail" asp-route-id="@item.Id">View</a>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <a class="btn btn-outline-secondary rounded-pill mr-2" asp-controller="Club" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                        <a class="btn btn-outline-secondary rounded-pill" asp-controller="Club" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    }
+                                </div>
+                                <small class="text-muted">@item.ClubCategory</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
